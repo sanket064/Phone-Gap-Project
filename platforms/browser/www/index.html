@@ -41,21 +41,50 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
     <script src="js/jquery.js"></script>
-    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.js"></script>
     <title>Hello World</title>
 </head>
 
 <body>
-    <div class="app">
-        <ul data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..." data-inset="true">
-                <li><a href="#">Apple</a></li>
-                <li><a href="#">Banana</a></li>
-                <li><a href="#">Cherry</a></li>
-                <li><a href="#">Cranberry</a></li>
-                <li><a href="#">Grape</a></li>
-                <li><a href="#">Orange</a></li>
-            </ul>
+    
+    <div data-role="page" id="home">
+		<div data-role="header"><h1>My Contacts</h1></div>
+		<div data-role="content"><h2>These are your contacts</h2>
+			<ul data-role="listview" id="contactListLi">
+				<li><a href="#showcontact">Bob</a></li>
+			</ul>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<nav data-role="navbar">
+				<ul>
+					<li><a href="#home" data-icon="user">Contacts</a></li>
+					<li><a href="#add" data-icon="plus" data-transition="pop">Add New</a></li>
+				</ul>
+			</nav>
+		</div>
     </div>
+    
+    <div data-role="page" id="add">
+		<div data-role="header"><h1>Add New Contact</h1></div>
+		<div data-role="content">
+			<div class="myForm">
+				<label>Name</label>
+				<input type="text" id="contactName" />
+				<label>Email</label>
+				<input type="email" id="contactEmail" />
+				<button id="saveNewContact">Save New Contact</button>
+			</div>
+		</div>
+		<div data-role="footer" data-position="fixed">
+			<nav data-role="navbar">
+				<ul>
+					<li><a href="#home" data-icon="user">Contacts</a></li>
+					<li><a href="#add" data-icon="plus">Add New</a></li>
+				</ul>
+			</nav>
+		</div>
+    </div>
+    
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
