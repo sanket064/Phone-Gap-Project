@@ -24,10 +24,21 @@ var app = {
         $(document).ready(function(){
              
             $("#saveNewContact").bind( "tap", tapHandler );
+
+            $("#saveEditContact").bind( "tap", editHandler );
          
             function tapHandler( event ){
                 insertRow();
                 $("body").pagecontainer("change", "#home");
+            }
+
+            function editHandler( event ){
+                // Update the local storage contact by ID.
+            }
+
+            function loadEditContact( event ){
+                // Get the contact and email of the list view item I have tapped on
+                // Load this data into the two input boxes
             }
         
             function insertRow(){
@@ -64,13 +75,38 @@ var app = {
                 var len = results.length, i;
                 for (i = 0; i < len; i++) {
                     // list.append("<li><a href=\"#\">" + results[i].contactName + "</li>");
-                    list.append(`<li><a href="#"> ${results[i].contactName} </li>`);
+                    list.append(`<li><a href="#editcontact">${results[i].contactName}</li>`);
                     console.log(results[i].contactName);
                 }
         
                 $("#contactListLi").listview("refresh");
                 
             }
-        });      
+        }); 
+            var options = new ContactFindOptions();
+            options.filter="";          // empty search string returns all contacts
+            options.multiple=true;      // return multiple results
+            filter = ["displayName"];   // return contact.displayName field
+
+            // find contacts
+            navigator.contacts.find(filter, onSuccess, onError, options);
+
+            var names = [];
+
+            // onSuccess: Get a snapshot of the current contacts
+            //
+            function onSuccess(contacts) {
+                for (var i=0; i<contacts.length; i++) {
+                    if (contacts[i].displayName) {  // many contacts don't have displayName
+                        names.push(contacts[i].displayName);
+                    }
+                }
+                alert('contacts loaded');
+                console.log(names);
+            }
+
+            function onError(err){
+                console.log(err);
+            }      
     }
 };
